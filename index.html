@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>Agent Marketplace — Discover</title>
+    <meta
+      name="description"
+      content="Discover high-quality agents to add to your workflow. Search, filter by type, rating, and tags, then add in one click."
+    />
+
+    <link rel="preload" href="./styles.css" as="style" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="bg" aria-hidden="true">
+      <div class="bg__glow bg__glow--1"></div>
+      <div class="bg__glow bg__glow--2"></div>
+      <div class="bg__glow bg__glow--3"></div>
+      <div class="bg__noise"></div>
+    </div>
+
+    <header class="top">
+      <div class="container">
+        <div class="top__row">
+          <div class="brand" aria-label="Agent Marketplace">
+            <div class="brand__mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M12 2.5c4.97 0 9 4.03 9 9 0 4.97-4.03 9-9 9s-9-4.03-9-9c0-4.97 4.03-9 9-9Z"
+                  class="svg-stroke"
+                  stroke-width="1.6"
+                />
+                <path
+                  d="M7.8 13.2c1.06 2.36 3.41 4 6.2 4 2.79 0 5.14-1.64 6.2-4"
+                  class="svg-stroke"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M9.2 10.2h.01M14.8 10.2h.01"
+                  class="svg-stroke"
+                  stroke-width="2.6"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </div>
+            <div class="brand__text">
+              <div class="brand__title">Agent Marketplace</div>
+              <div class="brand__subtitle">Discover agents. Add them to your workflow.</div>
+            </div>
+          </div>
+
+          <div class="top__meta" aria-label="Marketplace status">
+            <div class="pill" title="Curated catalog">
+              <span class="pill__dot" aria-hidden="true"></span>
+              Curated
+            </div>
+            <div class="pill" title="New weekly drops">
+              Weekly drops
+            </div>
+          </div>
+        </div>
+
+        <div class="search" role="search" aria-label="Search agents">
+          <div class="search__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z"
+                class="svg-stroke"
+                stroke-width="1.8"
+              />
+              <path
+                d="M16.6 16.6 21 21"
+                class="svg-stroke"
+                stroke-width="1.8"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+          <label class="sr-only" for="q">Search agents</label>
+          <input
+            id="q"
+            class="search__input"
+            type="search"
+            inputmode="search"
+            placeholder="Search agents by name, capability, or tag…"
+            autocomplete="off"
+          />
+          <button class="search__clear" type="button" data-action="clear-search" aria-label="Clear search">
+            <span aria-hidden="true">Clear</span>
+          </button>
+        </div>
+
+        <section class="filters" aria-label="Filters">
+          <div class="filters__row">
+            <div class="filter">
+              <label class="filter__label" for="type">Agent type</label>
+              <div class="select">
+                <select id="type" class="select__control" aria-label="Agent type filter">
+                  <option value="all">All types</option>
+                  <option value="research">Research</option>
+                  <option value="writing">Writing</option>
+                  <option value="design">Design</option>
+                  <option value="review">Review</option>
+                  <option value="data">Data</option>
+                  <option value="product">Product</option>
+                </select>
+                <span class="select__chev" aria-hidden="true">▾</span>
+              </div>
+            </div>
+
+            <div class="filter filter--wide">
+              <div class="filter__head">
+                <label class="filter__label" for="rating">Rating</label>
+                <div class="filter__value" aria-live="polite">
+                  <span data-rating-label>4.0+</span>
+                  <span class="stars" aria-hidden="true" data-rating-stars></span>
+                </div>
+              </div>
+              <input
+                id="rating"
+                class="range"
+                type="range"
+                min="3"
+                max="5"
+                step="0.1"
+                value="4"
+                aria-label="Minimum rating"
+              />
+              <div class="range__ticks" aria-hidden="true">
+                <span>3.0</span><span>3.5</span><span>4.0</span><span>4.5</span><span>5.0</span>
+              </div>
+            </div>
+
+            <div class="filter filter--tags">
+              <div class="filter__head">
+                <div class="filter__label">Functional tags</div>
+                <button class="link" type="button" data-action="clear-tags">Clear</button>
+              </div>
+              <div class="tags" role="list" aria-label="Tag cloud" data-tags></div>
+            </div>
+          </div>
+
+          <div class="filters__summary" aria-live="polite">
+            <span class="muted" data-summary>Showing agents…</span>
+            <button class="btn btn--ghost" type="button" data-action="reset-filters">Reset</button>
+          </div>
+        </section>
+      </div>
+    </header>
+
+    <main class="main" aria-label="Agent results">
+      <div class="container">
+        <div class="grid" data-grid aria-live="polite"></div>
+
+        <div class="empty" data-empty hidden>
+          <div class="empty__icon" aria-hidden="true">⟡</div>
+          <div class="empty__title">No agents found</div>
+          <div class="empty__desc">Try a different keyword or relax your filters.</div>
+          <button class="btn btn--primary" type="button" data-action="reset-filters">Reset filters</button>
+        </div>
+      </div>
+    </main>
+
+    <div class="toast" role="status" aria-live="polite" aria-atomic="true" data-toast>
+      <div class="toast__icon" aria-hidden="true">✓</div>
+      <div class="toast__text">
+        <div class="toast__title" data-toast-title>Added</div>
+        <div class="toast__desc" data-toast-desc>Agent was added to your workflow.</div>
+      </div>
+      <button class="toast__close" type="button" aria-label="Dismiss" data-action="dismiss-toast">✕</button>
+    </div>
+
+    <script defer src="./script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "agent-marketplace-discovery",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Agent Marketplace discovery page (static) served as a web app.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
