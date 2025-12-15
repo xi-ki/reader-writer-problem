@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <title>AI Agent：可规划、可执行、可迭代的智能体</title>
+    <meta
+      name="description"
+      content="一个关于 AI Agent 的现代静态网站：概念、能力、架构、场景与一个可交互的小型 Planner Demo。"
+    />
+
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">跳到主要内容</a>
+
+    <header class="topbar" role="banner">
+      <div class="container topbar__inner">
+        <div class="brand" aria-label="站点品牌">
+          <div class="brand__mark" aria-hidden="true">A</div>
+          <div class="brand__text">
+            <div class="brand__title">AI Agent</div>
+            <div class="brand__sub">从“回答问题”到“完成任务”</div>
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="主导航">
+          <a class="nav__link" href="#what">是什么</a>
+          <a class="nav__link" href="#capabilities">能力</a>
+          <a class="nav__link" href="#architecture">架构</a>
+          <a class="nav__link" href="#use-cases">场景</a>
+          <a class="nav__link" href="#demo">Demo</a>
+        </nav>
+
+        <div class="topbar__actions">
+          <button id="themeToggle" class="btn btn--ghost" type="button" aria-pressed="false">
+            切换主题
+          </button>
+          <a class="btn btn--primary" href="#demo">立即体验</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="main" role="main">
+      <section class="hero" aria-label="首页主视觉">
+        <div class="container hero__inner">
+          <div class="hero__copy">
+            <p class="pill">AI Agent 不是“更会聊天”，而是“更会做事”</p>
+            <h1 class="hero__title">
+              让模型具备 <span class="accent">规划</span>、<span class="accent">调用工具</span>、<span class="accent">记忆</span> 与
+              <span class="accent">反思</span> 的能力
+            </h1>
+            <p class="hero__desc">
+              这是一页式静态网站，概览 AI Agent 的核心概念、常见架构与落地场景，并提供一个纯前端的小型 Planner Demo，帮助你把“目标”拆成可执行步骤。
+            </p>
+
+            <div class="hero__cta">
+              <a class="btn btn--primary" href="#what">快速了解</a>
+              <a class="btn btn--ghost" href="#architecture">看架构</a>
+            </div>
+
+            <dl class="metrics" aria-label="关键指标（示意）">
+              <div class="metric">
+                <dt class="metric__k">任务完成</dt>
+                <dd class="metric__v">计划 → 执行 → 校验</dd>
+              </div>
+              <div class="metric">
+                <dt class="metric__k">可控性</dt>
+                <dd class="metric__v">工具白名单 + 约束</dd>
+              </div>
+              <div class="metric">
+                <dt class="metric__k">可观测</dt>
+                <dd class="metric__v">日志 + 轨迹 + 评估</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="hero__panel" aria-label="Agent 流程示意">
+            <div class="panel">
+              <div class="panel__top">
+                <div class="panel__title">Agent Loop</div>
+                <div class="panel__badge">Readable</div>
+              </div>
+
+              <ol class="loop" aria-label="循环步骤">
+                <li class="loop__item">
+                  <div class="loop__dot" aria-hidden="true"></div>
+                  <div class="loop__content">
+                    <div class="loop__h">理解目标</div>
+                    <div class="loop__p">把用户意图转成可验证的任务。</div>
+                  </div>
+                </li>
+                <li class="loop__item">
+                  <div class="loop__dot" aria-hidden="true"></div>
+                  <div class="loop__content">
+                    <div class="loop__h">规划步骤</div>
+                    <div class="loop__p">拆分、排序、设置约束与成功标准。</div>
+                  </div>
+                </li>
+                <li class="loop__item">
+                  <div class="loop__dot" aria-hidden="true"></div>
+                  <div class="loop__content">
+                    <div class="loop__h">调用工具</div>
+                    <div class="loop__p">搜索、代码、浏览器、数据库、函数等。</div>
+                  </div>
+                </li>
+                <li class="loop__item">
+                  <div class="loop__dot" aria-hidden="true"></div>
+                  <div class="loop__content">
+                    <div class="loop__h">校验与反思</div>
+                    <div class="loop__p">对照指标检查，必要时迭代修正。</div>
+                  </div>
+                </li>
+              </ol>
+
+              <div class="panel__foot">
+                <span class="muted">提示：把关键约束写清楚，Agent 才“可控”。</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="what" class="section" aria-label="AI Agent 是什么">
+        <div class="container">
+          <div class="section__head">
+            <h2 class="section__title">AI Agent 是什么？</h2>
+            <p class="section__desc">
+              AI Agent（智能体）是一种把大模型放进“闭环系统”的方法：它不仅生成文本，还会<strong>制定计划</strong>、<strong>调用外部工具</strong>、<strong>维护状态/记忆</strong>，并通过<strong>反馈</strong>不断改进。
+            </p>
+          </div>
+
+          <div class="grid grid--3">
+            <article class="card">
+              <h3 class="card__title">从回答到行动</h3>
+              <p class="card__text">把输出从“解释”升级为“执行”：创建任务、跑脚本、查数据、写代码、发工单。</p>
+            </article>
+            <article class="card">
+              <h3 class="card__title">有状态与可迭代</h3>
+              <p class="card__text">在长流程中维护上下文：任务列表、进度、结果、失败原因与下次策略。</p>
+            </article>
+            <article class="card">
+              <h3 class="card__title">可控与可评估</h3>
+              <p class="card__text">通过工具白名单、权限边界、预算、审计与评测，让它在生产环境可用。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="capabilities" class="section" aria-label="核心能力">
+        <div class="container">
+          <div class="section__head">
+            <h2 class="section__title">核心能力（你真正需要的）</h2>
+            <p class="section__desc">很多系统叫“Agent”，但是否具备这些能力，决定了它能否可靠地完成任务。</p>
+          </div>
+
+          <div class="grid grid--2">
+            <div class="card card--row">
+              <div class="icon" aria-hidden="true">🧭</div>
+              <div>
+                <h3 class="card__title">Planning（规划）</h3>
+                <p class="card__text">把目标拆成步骤，写清成功标准与约束，按依赖关系排序。</p>
+              </div>
+            </div>
+            <div class="card card--row">
+              <div class="icon" aria-hidden="true">🧰</div>
+              <div>
+                <h3 class="card__title">Tool Use（工具调用）</h3>
+                <p class="card__text">以结构化方式调用函数/服务，并处理失败重试、超时与权限。</p>
+              </div>
+            </div>
+            <div class="card card--row">
+              <div class="icon" aria-hidden="true">🧠</div>
+              <div>
+                <h3 class="card__title">Memory（记忆）</h3>
+                <p class="card__text">短期上下文 + 长期存储（向量检索/数据库），避免重复、保持一致。</p>
+              </div>
+            </div>
+            <div class="card card--row">
+              <div class="icon" aria-hidden="true">✅</div>
+              <div>
+                <h3 class="card__title">Verification（校验）</h3>
+                <p class="card__text">用测试、规则、评估指标来判定是否完成，而不是“看起来像”。</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout" role="note">
+            <div class="callout__title">实践建议</div>
+            <div class="callout__text">
+              优先把“成功标准”写成可测条件（例如：返回 JSON schema、通过测试、生成可运行命令），再让 Agent 去做。
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="architecture" class="section" aria-label="参考架构">
+        <div class="container">
+          <div class="section__head">
+            <h2 class="section__title">参考架构：一个可落地的 Agent Loop</h2>
+            <p class="section__desc">下面是典型的“感知 → 规划 → 执行 → 观察 → 反思”闭环，工程上常配合日志、权限与预算控制。</p>
+          </div>
+
+          <div class="diagram" aria-label="架构图">
+            <div class="diagram__row">
+              <div class="diagram__node">Input</div>
+              <div class="diagram__arrow" aria-hidden="true">→</div>
+              <div class="diagram__node">Planner</div>
+              <div class="diagram__arrow" aria-hidden="true">→</div>
+              <div class="diagram__node">Tool Runner</div>
+              <div class="diagram__arrow" aria-hidden="true">→</div>
+              <div class="diagram__node">Observation</div>
+            </div>
+            <div class="diagram__row diagram__row--sub">
+              <div class="diagram__node diagram__node--soft">Memory</div>
+              <div class="diagram__arrow" aria-hidden="true">↔</div>
+              <div class="diagram__node diagram__node--soft">Policy / Guardrails</div>
+              <div class="diagram__arrow" aria-hidden="true">↔</div>
+              <div class="diagram__node diagram__node--soft">Eval / Logs</div>
+            </div>
+          </div>
+
+          <details class="details">
+            <summary>这套架构在工程上最容易踩坑的点？</summary>
+            <ul class="list">
+              <li><strong>工具边界不清</strong>：权限过大或缺少审计，导致风险。</li>
+              <li><strong>缺少可验证目标</strong>：无法判断“完成/未完成”，造成循环或幻觉。</li>
+              <li><strong>观察不结构化</strong>：工具结果未标准化，导致后续推理质量差。</li>
+              <li><strong>没有预算控制</strong>：token/时间/调用次数失控。</li>
+            </ul>
+          </details>
+        </div>
+      </section>
+
+      <section id="use-cases" class="section" aria-label="应用场景">
+        <div class="container">
+          <div class="section__head">
+            <h2 class="section__title">常见落地场景</h2>
+            <p class="section__desc">适合 Agent 的任务通常具有：多步骤、需要工具、需要校验与迭代。</p>
+          </div>
+
+          <div class="grid grid--3">
+            <article class="card">
+              <h3 class="card__title">研发助手</h3>
+              <p class="card__text">代码搜索、改动、跑测试、生成 PR 描述、排查 CI。</p>
+              <p class="tag">Dev</p>
+            </article>
+            <article class="card">
+              <h3 class="card__title">数据分析助手</h3>
+              <p class="card__text">取数、清洗、图表、洞察、产出可复现的 Notebook/SQL。</p>
+              <p class="tag">Data</p>
+            </article>
+            <article class="card">
+              <h3 class="card__title">客服/运营自动化</h3>
+              <p class="card__text">意图识别、检索知识库、生成工单、回访与质检。</p>
+              <p class="tag">Ops</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="demo" class="section" aria-label="交互 Demo">
+        <div class="container">
+          <div class="section__head">
+            <h2 class="section__title">Demo：把目标拆成可执行的计划</h2>
+            <p class="section__desc">
+              这个 Demo 不依赖任何后端或模型，只用规则把“目标”组织成一份可执行计划（示意）。你可以把它当作提示词模板的骨架。
+            </p>
+          </div>
+
+          <div class="demo">
+            <div class="demo__left">
+              <label class="label" for="goal">你的目标</label>
+              <textarea
+                id="goal"
+                class="textarea"
+                rows="4"
+                placeholder="例如：为一个 AI Agent 做一个一页式官网，包含介绍、架构、场景和一个小 Demo。"
+              ></textarea>
+
+              <div class="demo__controls" aria-label="控制选项">
+                <label class="check">
+                  <input id="withSuccessCriteria" type="checkbox" checked />
+                  <span>包含成功标准</span>
+                </label>
+                <label class="check">
+                  <input id="withGuardrails" type="checkbox" checked />
+                  <span>包含约束/风险控制</span>
+                </label>
+                <label class="check">
+                  <input id="withTools" type="checkbox" checked />
+                  <span>包含工具调用（示意）</span>
+                </label>
+              </div>
+
+              <div class="demo__buttons">
+                <button id="generate" class="btn btn--primary" type="button">生成计划</button>
+                <button id="copy" class="btn btn--ghost" type="button">复制结果</button>
+              </div>
+
+              <p id="copyHint" class="hint" role="status" aria-live="polite"></p>
+            </div>
+
+            <div class="demo__right" aria-label="输出">
+              <div class="output">
+                <div class="output__head">
+                  <div class="output__title">Plan</div>
+                  <div class="output__meta" id="meta">等待输入…</div>
+                </div>
+                <pre id="result" class="pre" tabindex="0"></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer" role="contentinfo">
+        <div class="container footer__inner">
+          <div>
+            <div class="footer__title">AI Agent</div>
+            <div class="footer__text">这是一份静态示例站点，可直接打开使用与二次开发。</div>
+          </div>
+          <div class="footer__links">
+            <a class="footer__link" href="#main">回到顶部</a>
+            <a class="footer__link" href="#demo">去 Demo</a>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
